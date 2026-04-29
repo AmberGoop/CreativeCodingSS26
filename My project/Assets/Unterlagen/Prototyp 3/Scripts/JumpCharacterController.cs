@@ -62,4 +62,9 @@ public class JumpCharacterController : MonoBehaviour
 
         }
     }
+
+    public bool IsGameOver()
+    {
+        return isGameOver;
+    }
 }

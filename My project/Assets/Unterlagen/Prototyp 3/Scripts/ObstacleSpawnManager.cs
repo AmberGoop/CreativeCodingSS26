@@ -1,3 +1,4 @@
+using UnityEditor.Build;
 using UnityEngine;
 
 public class ObstacleSpawnManager : MonoBehaviour
@@ -10,13 +11,18 @@ public class ObstacleSpawnManager : MonoBehaviour
 
     // Zeit zwischen den Spawnvorgängen
     public float spawnInterval;
+    private JumpCharacterController playerScript;
 
     // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("SpawnObstacle", spawnInterval, spawnInterval);
+        playerScript = GameObject.Find("Player").GetComponent<JumpCharacterController>();
     }
-
+    void Update()
+    {
+        if (playerScript.IsGameOver()) { CancelInvoke("SpawnObstacle"); }
+    }
     /// <summary>
     /// Neues Hindernis im Level erzeugens
     /// </summary>
