@@ -657,6 +657,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: b186f9485a0828b468f98fe846ae1a68, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b186f9485a0828b468f98fe846ae1a68, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -880,7 +884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64cb07bc1c2f41142a306fc8ffe81656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpStrength: 15
+  jumpStrength: 13
   gravityModifier: 2.5
   jumpSound: {fileID: 8300000, guid: 0f7d0b7c3397f4dac91f20e8a77d2d57, type: 3}
   crashSound: {fileID: 8300000, guid: 4bcde6de2166e41e284ec46d8a01fb90, type: 3}

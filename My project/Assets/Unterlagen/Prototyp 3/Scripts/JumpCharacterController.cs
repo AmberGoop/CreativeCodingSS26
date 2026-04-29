@@ -23,6 +23,7 @@ public class JumpCharacterController : MonoBehaviour
     // Befindet sich der Spieler auf dem Boden?
     private bool isGrounded = true;
     private bool isGameOver = false;
+    private Animator playerAnimator;
 
 
     // Start is called before the first frame update
@@ -31,6 +32,7 @@ public class JumpCharacterController : MonoBehaviour
         // Rigibody-, Animator- und AudioSourc-Komponente auf GameObject suchen 
         // und in Variablen speichern
         playerRb = GetComponent<Rigidbody>();
+        playerAnimator = GetComponent<Animator>();
 
         // Graviation um einen Faktor zu erhöhen
         Physics.gravity *= gravityModifier;
@@ -40,10 +42,11 @@ public class JumpCharacterController : MonoBehaviour
     void Update()
     {
         // Soll gesprungen werden?
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded) 
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isGameOver) 
         {
             // Impulse für Sprung
             playerRb.AddForce(Vector3.up * jumpStrength, ForceMode.Impulse);
+            playerAnimator.SetTrigger("Jump_trig");
             isGrounded = false;
         }
     }
@@ -59,6 +62,8 @@ public class JumpCharacterController : MonoBehaviour
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
             isGameOver = true;
+            playerAnimator.SetBool("Death_b", true);
+            playerAnimator.SetInteger("DeathType_int", 1);
 
         }
     }
