@@ -5,10 +5,12 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float speed;
+    public float detectionRange;
+    public float dodgeSpeed;
 
     private Rigidbody enemyRb;
-
     private GameObject player;
+    private bool awake = false;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +23,12 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         Vector3 directionToPlayer = player.transform.position - transform.position;
-        enemyRb.AddForce(directionToPlayer.normalized * speed * Time.deltaTime);
+        if(directionToPlayer.magnitude<detectionRange&&!awake) { awake = true; enemyRb.AddForce(directionToPlayer.normalized * speed * Time.deltaTime * dodgeSpeed); }
+        if (awake)
+        {
+            enemyRb.AddForce(directionToPlayer.normalized * speed * Time.deltaTime);
+        }
+        
     }
+
 }
