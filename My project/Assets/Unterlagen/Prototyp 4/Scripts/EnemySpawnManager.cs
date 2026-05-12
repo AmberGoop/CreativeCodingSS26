@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class EnemySpawnManager : MonoBehaviour
@@ -53,10 +54,9 @@ public class EnemySpawnManager : MonoBehaviour
     // Berechne eine Position in einem bestimmten Bereich
     private Vector3 GenerateRandomPosition()
     {
-        Vector3 randowmPosition = new Vector3(  Random.Range(-spawnRange, spawnRange),
-                                                0,
-                                                Random.Range(-spawnRange, spawnRange));
+        Vector3 randowmPosition = Random.insideUnitCircle * spawnRange;
+        Vector3 finalRandomPos = new Vector3(randowmPosition.x, 0, randowmPosition.y);
 
-        return randowmPosition;
+        return finalRandomPos;
     }
 }
